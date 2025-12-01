@@ -1,0 +1,847 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home - Package Tracker{% endblock %}
+
+{% block content %}
+<div id="rev_slider_5_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" data-alias="logistics" data-source="gallery" style="margin:0px auto;background:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
+    <!-- START REVOLUTION SLIDER 5.4.8 fullwidth mode -->
+    <div id="rev_slider_5_1" class="rev_slider fullwidthabanner" style="display:none;" data-version="5.4.8">
+        <ul>
+            <!-- SLIDE  -->
+            <li data-index="rs-8" data-transition="fade" data-slotamount="default" data-hideafterloop="0" data-hideslideonmobile="off" data-easein="default" data-easeout="default" data-masterspeed="300" data-rotate="0" data-saveperformance="off" data-title="Slide" data-param1="" data-param2="" data-param3="" data-param4="" data-param5="" data-param6="" data-param7="" data-param8="" data-param9="" data-param10="" data-description="">
+                <!-- MAIN IMAGE -->
+                <img src="{% static 'rslider/assets/29cca-slider-5.jpg' %}" alt="" data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" class="rev-slidebg" data-no-retina>
+                <!-- LAYERS -->
+
+                <!-- LAYER NR. 1 -->
+                <div class="tp-caption   tp-resizeme" id="slide-8-layer-1" data-x="['left','left','left','center']" data-hoffset="['0','43','52','2']" data-y="['middle','middle','middle','middle']" data-voffset="['-67','-68','-64','-56']" data-width="461" data-height="173" data-whitespace="nowrap" data-type="text" data-responsive_offset="on" data-frames='[{"delay":10,"speed":1140,"frame":"0","from":"y:50px;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"}]' data-textAlign="['inherit','inherit','inherit','center']" data-paddingtop="[0,0,0,0]" data-paddingright="[0,0,0,0]" data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]" style="z-index: 5; min-width: 461px; max-width: 461px; max-width: 173px; max-width: 173px; white-space: nowrap; font-size: 50px; line-height: 59px; font-weight: 400; color: #000000; letter-spacing: -4px;font-family:Poppins;">Making<br> Transportation
+                    <br> Fast & Savw </div>
+
+                <!-- LAYER NR. 2 -->
+                <div class="tp-caption rev-btn " id="slide-8-layer-2" data-x="['left','left','left','center']" data-hoffset="['0','41','47','7']" data-y="['top','top','top','top']" data-voffset="['345','372','378','375']" data-width="none" data-height="none" data-whitespace="nowrap" data-type="button" data-responsive_offset="on" data-responsive="off" data-frames='[{"delay":640,"speed":1120,"frame":"0","from":"y:50px;opacity:0;","to":"o:1;","ease":"Power3.easeInOut"},{"delay":"wait","speed":300,"frame":"999","to":"opacity:0;","ease":"Power3.easeInOut"},{"frame":"hover","speed":"0","ease":"Linear.easeNone","to":"o:1;rX:0;rY:0;rZ:0;z:0;","style":"c:rgb(255,255,255);bg:transparent;bc:rgb(255,255,255);"}]' data-textAlign="['inherit','inherit','inherit','inherit']" data-paddingtop="[12,12,12,12]" data-paddingright="[35,35,35,35]" data-paddingbottom="[12,12,12,12]" data-paddingleft="[35,35,35,35]" style="z-index: 6; white-space: nowrap; font-size: 14px; line-height: 17px; font-weight: 500; color: rgba(255,255,255,1); letter-spacing: px;font-family:Poppins;background-color:rgb(229,57,53);border-color:rgb(229,57,53);border-style:solid;border-width:2px 2px 2px 2px;border-radius:30px 30px 30px 30px;outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;">Contact Us </div>
+            </li>
+        </ul>
+        <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
+    </div>
+</div>
+<!-- END REVOLUTION SLIDER -->
+
+<!-- TRACKING FORM - ADDED BELOW THE SLIDER -->
+<div class="tracking-section" style="background: linear-gradient(135deg, #e53935 0%, #c62828 100%); padding: 40px 0 60px; margin-top: -5px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-12">
+                <div class="tracking-form-container text-center">
+                    <h2 class="tracking-title" style="color: white; margin-bottom: 20px; font-size: clamp(28px, 5vw, 36px); font-weight: 700; line-height: 1.2;">Track Your Package</h2>
+                    <p class="tracking-subtitle" style="color: rgba(255,255,255,0.9); margin-bottom: 30px; font-size: clamp(16px, 2.5vw, 18px); padding: 0 10px; line-height: 1.5;">
+                        Enter your tracking number to check real-time package status and delivery updates
+                    </p>
+                    
+                    <form method="post" action="{% url 'track_shipment' %}" class="tracking-form" id="homeTrackingForm">
+                        {% csrf_token %}
+                        <div class="input-group input-group-lg search-container" style="max-width: 700px; margin: 0 auto; display: flex; align-items: stretch;">
+                            <input type="text" name="tracking_number" 
+                                   class="form-control track-input" 
+                                   placeholder="Enter your tracking number (e.g., FEDEX123450)"
+                                   style="border: none; border-radius: 50px 0 0 50px; padding: 15px 25px; font-size: 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; min-height: 56px; flex: 1;"
+                                   required
+                                   id="homeTrackingInput">
+                            <button type="submit" 
+                                    class="btn btn-light track-button"
+                                    style="background: white; color: #e53935; border: none; border-radius: 0 50px 50px 0; padding: 15px 30px; font-size: 15px; font-weight: 600; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: all 0.3s ease; min-height: 56px; min-width: 140px; white-space: nowrap; margin-left: -1px;">
+                                <i class="fa fa-search" style="margin-right: 6px;"></i> Track
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="tracking-features" style="margin-top: 40px; display: flex; justify-content: center; gap: clamp(20px, 5vw, 40px); flex-wrap: wrap;">
+                        <div style="color: white; text-align: center; min-width: 120px;">
+                            <i class="fa fa-clock-o" style="font-size: clamp(20px, 4vw, 24px); margin-bottom: 8px;"></i>
+                            <div style="font-size: clamp(14px, 2vw, 16px);">Real-time Updates</div>
+                        </div>
+                        <div style="color: white; text-align: center; min-width: 120px;">
+                            <i class="fa fa-map-marker" style="font-size: clamp(20px, 4vw, 24px); margin-bottom: 8px;"></i>
+                            <div style="font-size: clamp(14px, 2vw, 16px);">Live Location</div>
+                        </div>
+                        <div style="color: white; text-align: center; min-width: 120px;">
+                            <i class="fa fa-bell" style="font-size: clamp(20px, 4vw, 24px); margin-bottom: 8px;"></i>
+                            <div style="font-size: clamp(14px, 2vw, 16px);">Notifications</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- END REVOLUTION SLIDER -->
+<div class="service-section-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="service layout-3 sm-mb-35px">
+                    <div class="clearfix">
+                        <div class="icon"><img src="{% static 'icons/service-light-1.png' %}" alt=""></div>
+                        <a href="#" class="title">Road Freight</a>
+                    </div>
+                    <div class="dis clearfix">
+                        Chances are unless you are very lucky you will.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service layout-3 sm-mb-35px">
+                    <div class="clearfix">
+                        <div class="icon"><img src="{% static 'icons/service-light-2.png' %}" alt=""></div>
+                        <a href="#" class="title">Air Freight</a>
+                    </div>
+                    <div class="dis clearfix">
+                        Chances are unless you are very lucky you will.
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="service layout-3">
+                    <div class="clearfix">
+                        <div class="icon"><img src="{% static 'icons/service-light-3.png' %}" alt=""></div>
+                        <a href="#" class="title">Ocean Freight</a>
+                    </div>
+                    <div class="dis clearfix">
+                        Chances are unless you are very lucky you will.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--============= About Us =============-->
+<div class="nile-about-section">
+    <div class="container">
+        <!-- Title -->
+        <div class="section-title margin-bottom-40px">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="icon text-main-color"><i class="fa fa-truck"></i></div>
+                    <div class="h2">Our Service</div>
+                    <div class="des">In quis luctus dolor. Sed ac libero arcu. Phasellus vulputate ultrices augue, eget feugiat lectus efficitur in. Nulla non pharetra justo. Nunc viverra consectetur bibendum. </div>
+                </div>
+            </div>
+        </div>
+        <!-- // End Title -->
+
+        <div class="row">
+
+            <div class="col-lg-3 col-md-6">
+                <div class="service-icon-box">
+                    <div class="icon"><img src="{% static 'icons/service-dark-1.png' %}" alt=""></div>
+                    <a href="#" class="title h2">Cargo Transportation</a>
+                    <div class="des">Ut elit tellus, luctus nec magna mattis et, pulvinar dapibus lorem leo ultricies et vitae enim.</div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+                <div class="service-icon-box">
+                    <div class="icon"><img src="{% static 'icons/service-dark-2.png' %}" alt=""></div>
+                    <a href="#" class="title h2">Air Freight</a>
+                    <div class="des">Ut elit tellus, luctus nec magna mattis et, pulvinar dapibus lorem leo ultricies et vitae enim.</div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+                <div class="service-icon-box">
+                    <div class="icon"><img src="{% static 'icons/service-dark-3.png' %}" alt=""></div>
+                    <a href="#" class="title h2">Ocean Freight</a>
+                    <div class="des">Ut elit tellus, luctus nec magna mattis et, pulvinar dapibus lorem leo ultricies et vitae enim.</div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+                <div class="service-icon-box">
+                    <div class="icon"><img src="{% static 'icons/service-dark-4.png' %}" alt=""></div>
+                    <a href="#" class="title h2">Packaging & Storage</a>
+                    <div class="des">Ut elit tellus, luctus nec magna mattis et, pulvinar dapibus lorem leo ultricies et vitae enim.</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="text-center">
+            <a href="#" class="nile-bottom md">Show all <i class="fa fa-arrow-right"></i> </a>
+        </div>
+
+    </div>
+
+</div>
+<!--============= //About Us =============-->
+
+
+
+<div class="call-action ba-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7 padding-tb-15px">
+                <h2>Unbeatable Trucking and Transport Services</h2>
+                <div class="text">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua</div>
+            </div>
+            <div class="col-lg-5">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 sm-mb-45px">
+                        <a href="#" class="action-bottom layout-1">
+                            <img src="{% static 'icons/small-icon-1.png' %}" alt=""> 
+                            <h4>Tell Friend</h4>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-4 sm-mb-45px">
+                        <a href="#" class="action-bottom layout-1">
+                            <img src="{% static 'icons/small-icon-2.png' %}" alt=""> 
+                            <h4>Read More</h4>
+                        </a>
+                    </div>
+                    <div class="col-lg-4 col-md-4">
+                        <a href="#" class="action-bottom layout-1">
+                            <img src="{% static 'icons/small-icon-3.png' %}" alt=""> 
+                            <h4>Contact Us</h4>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="section padding-tb-100px section-ba-2">
+    <div class="container">
+        <!-- Title -->
+        <div class="section-title margin-bottom-40px">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="icon text-main-color"><i class="fa fa-money"></i></div>
+                    <div class="h2">Our Pricing</div>
+                    <div class="des">In quis luctus dolor. Sed ac libero arcu. Phasellus vulputate ultrices augue, eget feugiat lectus efficitur in. Nulla non pharetra justo. Nunc viverra consectetur bibendum. </div>
+                </div>
+            </div>
+        </div>
+        <!-- // End Title -->
+
+        <div class="row">
+
+            <!-- item -->
+            <div class="col-lg-3 col-md-6">
+                <div class="price-table">
+                    <div class="title main-color">BASIC</div>
+                    <div class="price"><span>$</span>199</div>
+                    <div class="per-mile">PER MILE</div>
+                    <ul class="elements">
+                        <li>4000 kg load</li>
+                        <li>425 kg / pallet </li>
+                        <li>Warehousing</li>
+                        <li>Free Packaging </li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <div class="padding-25px">
+                        <a href="#" class="nile-bottom sm-block">ORDER NOW</a>
+                    </div>
+                </div>
+            </div>
+            <!-- // end item -->
+
+            <!-- item -->
+            <div class="col-lg-3 col-md-6">
+                <div class="price-table">
+                    <div class="title main-color">BASIC</div>
+                    <div class="price"><span>$</span>213</div>
+                    <div class="per-mile">PER MILE</div>
+                    <ul class="elements">
+                        <li>4000 kg load</li>
+                        <li>425 kg / pallet </li>
+                        <li>Warehousing</li>
+                        <li>Free Packaging </li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <div class="padding-25px">
+                        <a href="#" class="nile-bottom sm-block">ORDER NOW</a>
+                    </div>
+                </div>
+            </div>
+            <!-- // end item -->
+
+            <!-- item -->
+            <div class="col-lg-3 col-md-6">
+                <div class="price-table active">
+                    <div class="title main-color">BASIC</div>
+                    <div class="price"><span>$</span>813</div>
+                    <div class="per-mile">PER MILE</div>
+                    <ul class="elements">
+                        <li>4000 kg load</li>
+                        <li>425 kg / pallet </li>
+                        <li>Warehousing</li>
+                        <li>Free Packaging </li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <div class="padding-25px">
+                        <a href="#" class="nile-bottom sm-block">ORDER NOW</a>
+                    </div>
+                </div>
+            </div>
+            <!-- // end item -->
+
+            <!-- item -->
+            <div class="col-lg-3 col-md-6">
+                <div class="price-table">
+                    <div class="title main-color">BASIC</div>
+                    <div class="price"><span>$</span>650</div>
+                    <div class="per-mile">PER MILE</div>
+                    <ul class="elements">
+                        <li>4000 kg load</li>
+                        <li>425 kg / pallet </li>
+                        <li>Warehousing</li>
+                        <li>Free Packaging </li>
+                        <li>24/7 support</li>
+                    </ul>
+                    <div class="padding-25px">
+                        <a href="#" class="nile-bottom sm-block">ORDER NOW</a>
+                    </div>
+                </div>
+            </div>
+            <!-- // end item -->
+
+        </div>
+
+    </div>
+</div>
+
+<div class="partners">
+    <div class="nile-about-section">
+        <div class="container">
+            <div class="row">
+
+                <!-- partners item -->
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="partners-item margin-bottom-tb-15px text-center">
+                        <img src="{% static 'img/partners-1.jpg' %}" alt="">
+                    </div>
+                </div>
+                <!--//  partners item -->
+
+                <!-- partners item -->
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="partners-item margin-tb-15px text-center">
+                        <img src="{% static 'img/partners-2.jpg' %}" alt="">
+                    </div>
+                </div>
+                <!--//  partners item -->
+
+                <!-- partners item -->
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="partners-item margin-tb-15px text-center">
+                        <img src="{% static 'img/partners-3.jpg' %}" alt="">
+                    </div>
+                </div>
+                <!--//  partners item -->
+
+                <!-- partners item -->
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="partners-item margin-tb-15px text-center">
+                        <img src="{% static 'img/partners-4.jpg' %}" alt="">
+                    </div>
+                </div>
+                <!--//  partners item -->
+
+                <!-- partners item -->
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="partners-item margin-tb-15px text-center">
+                        <img src="{% static 'img/partners-5.jpg' %}" alt="">
+                    </div>
+                </div>
+                <!--//  partners item -->
+
+                <!-- partners item -->
+                <div class="col-lg-2 col-md-3 col-sm-6">
+                    <div class="partners-item margin-tb-15px text-center">
+                        <img src="{% static 'img/partners-6.jpg' %}" alt="">
+                    </div>
+                </div>
+                <!--//  partners item -->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section padding-tb-100px section-ba-3">
+    <div class="container">
+        <!-- Title -->
+        <div class="section-title margin-bottom-40px">
+            <div class="row justify-content-center">
+                <div class="col-lg-7">
+                    <div class="icon text-main-color"><i class="fa fa-bookmark-o"></i></div>
+                    <div class="h2">Last News</div>
+                    <div class="des">In quis luctus dolor. Sed ac libero arcu. Phasellus vulputate ultrices augue, eget feugiat lectus efficitur in. Nulla non pharetra justo. Nunc viverra consectetur bibendum. </div>
+                </div>
+            </div>
+        </div>
+        <!-- // End Title -->
+
+        <div class="row">
+
+            <div class="col-lg-4 col-md-6 sm-mb-35px">
+                <div class="blog-item">
+                    <div class="img">
+                        <a href="#"><img src="{% static 'img/blog-grid-1.jpg' %}" alt=""></a>
+                        <a href="#" class="date">
+                            <span class="day">15</span>
+                            <span class="month">April</span>
+                        </a>
+                    </div>
+                    <a href="#" class="title">Long Don't Spend Time Beating On A Wall, Hoping To Trans ...</a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 sm-mb-35px">
+                <div class="blog-item">
+                    <div class="img">
+                        <a href="#"><img src="{% static 'img/blog-grid-2.jpg' %}" alt=""></a>
+                        <a href="#" class="date">
+                            <span class="day">15</span>
+                            <span class="month">April</span>
+                        </a>
+                    </div>
+                    <a href="#" class="title">Long Don't Spend Time Beating On A Wall, Hoping To Trans ...</a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 sm-mb-35px">
+                <div class="blog-item">
+                    <div class="img">
+                        <a href="#"><img src="{% static 'img/blog-grid-3.jpg' %}" alt=""></a>
+                        <a href="#" class="date">
+                            <span class="day">15</span>
+                            <span class="month">April</span>
+                        </a>
+                    </div>
+                    <a href="#" class="title">Long Don't Spend Time Beating On A Wall, Hoping To Trans ...</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Enhanced form submission handler with fancy effects
+    (function() {
+        // Initialize when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const homeTrackingForm = document.getElementById('homeTrackingForm');
+            const trackingInput = document.getElementById('homeTrackingInput');
+            const trackButton = document.querySelector('.track-button');
+            
+            if (!homeTrackingForm || !trackingInput || !trackButton) return;
+            
+            // 1. Fancy cursor effect on search bar
+            trackingInput.addEventListener('mouseenter', function() {
+                this.style.cursor = 'text';
+                this.style.boxShadow = '0 4px 20px rgba(0,0,0,0.2)';
+                this.style.transition = 'all 0.3s ease';
+            });
+            
+            trackingInput.addEventListener('mouseleave', function() {
+                this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+            });
+            
+            trackingInput.addEventListener('focus', function() {
+                this.style.cursor = 'text';
+                this.style.boxShadow = '0 4px 25px rgba(0,0,0,0.25)';
+                this.style.transform = 'scale(1.01)';
+            });
+            
+            trackingInput.addEventListener('blur', function() {
+                this.style.transform = 'scale(1)';
+                this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+            });
+            
+            // 2. Fancy button hover effects
+            trackButton.addEventListener('mouseenter', function() {
+                this.style.cursor = 'pointer';
+                this.style.transform = 'translateY(-2px)';
+                this.style.boxShadow = '0 6px 20px rgba(0,0,0,0.15)';
+                this.style.transition = 'all 0.3s ease';
+            });
+            
+            trackButton.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+            });
+            
+            // 3. Enhanced form submission with 2-second loader - FIXED VERSION
+            homeTrackingForm.addEventListener('submit', function(e) {
+                // Store original button content
+                const originalHTML = trackButton.innerHTML;
+                const originalWidth = trackButton.offsetWidth + 'px';
+                const trackingNumber = trackingInput.value.trim();
+                
+                // Basic validation
+                if (!trackingNumber) {
+                    e.preventDefault();
+                    
+                    // Shake animation for empty input
+                    trackingInput.style.animation = 'shake 0.5s';
+                    trackingInput.focus();
+                    
+                    setTimeout(() => {
+                        trackingInput.style.animation = '';
+                    }, 500);
+                    
+                    return;
+                }
+                
+                // Prevent double submission
+                if (trackButton.disabled) {
+                    e.preventDefault();
+                    return;
+                }
+                
+                e.preventDefault(); // Prevent immediate submission
+                
+                // Show fancy loading state
+                trackButton.innerHTML = `
+                    <span class="loading-spinner">
+                        <i class="fa fa-spinner fa-spin" style="margin-right: 8px;"></i>
+                        Tracking...
+                    </span>
+                `;
+                trackButton.disabled = true;
+                trackButton.style.width = originalWidth;
+                trackButton.style.cursor = 'wait';
+                trackButton.style.opacity = '0.9';
+                
+                // Add pulse animation to button
+                trackButton.style.animation = 'pulse 1s infinite';
+                
+                // Add loading animation to input
+                trackingInput.disabled = true;
+                trackingInput.style.cursor = 'wait';
+                trackingInput.style.opacity = '0.7';
+                trackingInput.style.background = 'linear-gradient(90deg, #fff 0%, #f8f9fa 50%, #fff 100%)';
+                trackingInput.style.backgroundSize = '200% 100%';
+                trackingInput.style.animation = 'shimmer 2s infinite';
+                
+                console.log('Starting 2-second delay before submission...');
+                console.log('Tracking number to submit:', trackingNumber);
+                
+                // Create a hidden clone form to submit
+                setTimeout(() => {
+                    console.log('Submitting form after 2-second delay...');
+                    
+                    // Remove animations
+                    trackButton.style.animation = '';
+                    trackingInput.style.animation = '';
+                    
+                    // Create a hidden form to submit
+                    const hiddenForm = document.createElement('form');
+                    hiddenForm.method = 'POST';
+                    hiddenForm.action = homeTrackingForm.action;
+                    hiddenForm.style.display = 'none';
+                    
+                    // Add CSRF token
+                    const csrfToken = document.createElement('input');
+                    csrfToken.type = 'hidden';
+                    csrfToken.name = 'csrfmiddlewaretoken';
+                    csrfToken.value = document.querySelector('[name=csrfmiddlewaretoken]').value;
+                    hiddenForm.appendChild(csrfToken);
+                    
+                    // Add tracking number
+                    const trackingInputClone = document.createElement('input');
+                    trackingInputClone.type = 'hidden';
+                    trackingInputClone.name = 'tracking_number';
+                    trackingInputClone.value = trackingNumber;
+                    hiddenForm.appendChild(trackingInputClone);
+                    
+                    // Append to body and submit
+                    document.body.appendChild(hiddenForm);
+                    hiddenForm.submit();
+                    
+                }, 2000);
+            });
+            
+            // 4. Add keypress animation
+            trackingInput.addEventListener('keypress', function(e) {
+                // Add subtle scale effect on keypress
+                this.style.transform = 'scale(1.005)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1.01)';
+                }, 50);
+            });
+        });
+        
+        // Add CSS animations
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+                20%, 40%, 60%, 80% { transform: translateX(5px); }
+            }
+            
+            @keyframes pulse {
+                0% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+                50% { transform: scale(1.02); box-shadow: 0 6px 20px rgba(229, 57, 53, 0.3); }
+                100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+            }
+            
+            @keyframes shimmer {
+                0% { background-position: -200% 0; }
+                100% { background-position: 200% 0; }
+            }
+            
+            .track-button {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            }
+            
+            #homeTrackingInput {
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            }
+            
+            .loading-spinner {
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            .fa-spin {
+                animation: fa-spin 1s infinite linear !important;
+            }
+            
+            @keyframes fa-spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // And update the responsive adjustment function:
+function adjustButtonText() {
+    const width = window.innerWidth;
+    const buttons = document.querySelectorAll('.track-button');
+    
+    buttons.forEach(button => {
+        if (width <= 400) {
+            button.innerHTML = '<i class="fa fa-search"></i>';
+            button.style.minWidth = '60px';
+        } else if (width <= 576) {
+            button.innerHTML = '<i class="fa fa-search" style="margin-right: 4px;"></i> Track';
+            button.style.minWidth = '90px';
+        } else {
+            button.innerHTML = '<i class="fa fa-search" style="margin-right: 6px;"></i> Track';
+            button.style.minWidth = '140px';
+        }
+    });
+}
+
+// Call on load and resize
+window.addEventListener('load', adjustButtonText);
+window.addEventListener('resize', adjustButtonText);
+    })();
+</script>
+
+<style>
+    /* Additional inline styles for better visual effects */
+    .tracking-form-container form {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .tracking-form-container form:before {
+        content: '';
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+        border-radius: 60px;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+    
+    .tracking-form-container form:hover:before {
+        opacity: 1;
+    }
+    
+    /* Glow effect on focus */
+    #homeTrackingInput:focus {
+        outline: none;
+        border: none;
+        animation: input-glow 2s infinite alternate;
+    }
+    
+    @keyframes input-glow {
+        from {
+            box-shadow: 0 4px 25px rgba(0,0,0,0.25),
+                        0 0 5px rgba(229, 57, 53, 0.2);
+        }
+        to {
+            box-shadow: 0 4px 25px rgba(0,0,0,0.25),
+                        0 0 10px rgba(229, 57, 53, 0.4);
+        }
+    }
+
+    /* Responsive Search Box with smaller button */
+    .search-container {
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .track-input {
+        flex: 1 !important;
+        min-width: 0; /* Allows shrinking */
+    }
+    
+    .track-button {
+        min-width: 140px !important;
+        max-width: 160px;
+        flex-shrink: 0;
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+        .search-container {
+            max-width: 100% !important;
+        }
+        
+        .track-input {
+            padding: 14px 20px !important;
+            font-size: 15px !important;
+            min-height: 52px !important;
+        }
+        
+        .track-button {
+            padding: 14px 20px !important;
+            font-size: 14px !important;
+            min-height: 52px !important;
+            min-width: 120px !important;
+        }
+        
+        .track-button i {
+            margin-right: 4px !important;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .tracking-title {
+            font-size: 24px !important;
+            padding: 0 15px;
+        }
+        
+        .tracking-subtitle {
+            font-size: 15px !important;
+            padding: 0 15px !important;
+            margin-bottom: 25px !important;
+        }
+        
+        .track-input {
+            padding: 12px 18px !important;
+            font-size: 14px !important;
+            min-height: 48px !important;
+            border-radius: 50px 0 0 50px !important;
+        }
+        
+        .track-button {
+            padding: 12px 15px !important;
+            font-size: 14px !important;
+            min-height: 48px !important;
+            min-width: 100px !important;
+            border-radius: 0 50px 50px 0 !important;
+        }
+        
+        .track-button i {
+            margin-right: 4px !important;
+        }
+    }
+    
+    @media (max-width: 400px) {
+        .track-input {
+            padding: 10px 15px !important;
+            font-size: 13px !important;
+            min-height: 44px !important;
+        }
+        
+        .track-button {
+            padding: 10px 12px !important;
+            font-size: 13px !important;
+            min-height: 44px !important;
+            min-width: 90px !important;
+        }
+        
+        .track-button i {
+            margin-right: 3px !important;
+            font-size: 14px;
+        }
+    }
+    
+    /* Tablet Optimization */
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .search-container {
+            max-width: 600px !important;
+        }
+        
+        .track-input {
+            padding: 16px 25px !important;
+            min-height: 56px !important;
+        }
+        
+        .track-button {
+            padding: 16px 25px !important;
+            min-height: 56px !important;
+            min-width: 130px !important;
+        }
+    }
+    
+    /* Desktop Optimization */
+    @media (min-width: 1200px) {
+        .search-container {
+            max-width: 750px !important;
+        }
+        
+        .track-input {
+            padding: 16px 30px !important;
+            min-height: 58px !important;
+        }
+        
+        .track-button {
+            padding: 16px 35px !important;
+            min-height: 58px !important;
+            min-width: 150px !important;
+        }
+    }
+    
+    /* Ensure proper visual connection between input and button */
+    .track-input:focus + .track-button {
+        box-shadow: 0 4px 20px rgba(229, 57, 53, 0.2) !important;
+    }
+    
+    /* Hover effects for better UX */
+    .track-input:hover {
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
+    }
+    
+    .track-button:hover {
+        transform: translateY(-1px) !important;
+        box-shadow: 0 6px 20px rgba(0,0,0,0.15) !important;
+    }
+
+</style>
+{% endblock %}

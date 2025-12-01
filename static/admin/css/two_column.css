@@ -1,0 +1,83 @@
+/* Two column layout for ALL form rows (main form + packages) */
+.form-row {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 20px !important;
+    margin-bottom: 15px !important;
+    align-items: flex-start !important;
+}
+
+/* Each field container takes half width */
+.form-row > div {
+    flex: 1 1 calc(50% - 20px) !important;
+    min-width: 200px !important;
+    margin-bottom: 0 !important;
+}
+
+/* Three column layout for package dimensions */
+.form-row .field-length_cm,
+.form-row .field-width_cm,
+.form-row .field-height_cm {
+    flex: 1 1 calc(33.333% - 20px) !important;
+    min-width: 120px !important;
+}
+
+/* Fix for ForeignKey fields with related widget */
+.form-row .related-widget-wrapper {
+    display: block !important;
+    width: 100% !important;
+}
+
+.form-row .related-widget-wrapper select {
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* Make all inputs full width */
+.form-row input[type="text"],
+.form-row input[type="email"],
+.form-row input[type="number"],
+.form-row input[type="date"],
+.form-row input[type="time"],
+.form-row select,
+.form-row textarea {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+}
+
+/* Full width fields */
+.field-comments,
+.field-remarks,
+.field-description {
+    flex: 1 1 100% !important;
+    min-width: 100% !important;
+}
+
+/* Labels */
+label {
+    display: block !important;
+    margin-bottom: 5px !important;
+    font-weight: bold !important;
+}
+
+/* Package inline styling */
+.inline-group {
+    margin-top: 20px !important;
+}
+
+.inline-group h2 {
+    background: #417690 !important;
+    color: rgb(0, 0, 0) !important;
+    padding: 10px 15px !important;
+    margin: 0 0 15px 0 !important;
+    border-radius: 4px !important;
+}
+
+/* Remove table borders for stacked inline */
+.inline-related {
+    border: 1px solid #ddd !important;
+    border-radius: 4px !important;
+    padding: 15px !important;
+    margin-bottom: 15px !important;
+}
