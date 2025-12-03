@@ -29,7 +29,7 @@ DEBUG = False
 # Update with your PythonAnywhere domain
 ALLOWED_HOSTS = [
     'tracking.pythonanywhere.com',  # Replace with your actual username
-    'www.yourusername.pythonanywhere.com',
+    'www.tracking.pythonanywhere.com',
     'localhost',  # Keep for local testing if needed
     '127.0.0.1',
 ]
