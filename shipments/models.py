@@ -115,6 +115,12 @@ class Shipment(models.Model):
     status = models.ForeignKey(StatusType, on_delete=models.SET_NULL, null=True)
     remarks = models.TextField(blank=True, null=True)
 
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Created At")
+    updated_at = models.DateTimeField(auto_now=True, verbose_name="Updated At")
+    
+    class Meta:
+        ordering = ['-created_at']
+
     def __str__(self):
         return f"Shipment {self.shipment_number}"
 

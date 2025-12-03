@@ -1,0 +1,488 @@
+<!-- templates/about.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Nile Logistics - Global Shipping Experts{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Hero Section */
+    .about-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 250px 0 190px;
+        text-align: center;
+    }
+    
+    .about-hero h1 {
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    .about-hero p {
+        font-size: 20px;
+        max-width: 700px;
+        margin: 0 auto;
+        opacity: 0.9;
+    }
+    
+    /* Stats Section */
+    .stats-section {
+        background: #f8f9fa;
+        padding: 60px 0;
+    }
+    
+    .stat-item {
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .stat-number {
+        font-size: 48px;
+        font-weight: 700;
+        color: #e53935;
+        margin-bottom: 10px;
+    }
+    
+    .stat-label {
+        font-size: 16px;
+        color: #666;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    
+    /* Mission & Vision */
+    .mission-vision {
+        padding: 80px 0;
+        background: white;
+    }
+    
+    .mission-box, .vision-box {
+        padding: 40px;
+        border-radius: 10px;
+        height: 100%;
+        transition: transform 0.3s ease;
+    }
+    
+    .mission-box {
+        background: #e8f5e9;
+        border-left: 5px solid #32CD32;
+    }
+    
+    .vision-box {
+        background: #e3f2fd;
+        border-left: 5px solid #1E90FF;
+    }
+    
+    .mission-box:hover, .vision-box:hover {
+        transform: translateY(-10px);
+    }
+    
+    /* Values Section */
+    .values-section {
+        padding: 80px 0;
+        background: #f8f9fa;
+    }
+    
+    .value-card {
+        text-align: center;
+        padding: 30px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-bottom: 30px;
+        height: 100%;
+        transition: transform 0.3s ease;
+    }
+    
+    .value-card:hover {
+        transform: translateY(-5px);
+    }
+    
+    .value-icon {
+        font-size: 40px;
+        color: #e53935;
+        margin-bottom: 20px;
+    }
+    
+    /* Timeline */
+    .timeline-section {
+        padding: 80px 0;
+        background: white;
+    }
+    
+    .timeline {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .timeline::after {
+        content: '';
+        position: absolute;
+        width: 4px;
+        background: #e53935;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        margin-left: -2px;
+    }
+    
+    .timeline-item {
+        padding: 10px 40px;
+        position: relative;
+        width: 50%;
+        box-sizing: border-box;
+        margin-bottom: 50px;
+    }
+    
+    .timeline-item:nth-child(odd) {
+        left: 0;
+    }
+    
+    .timeline-item:nth-child(even) {
+        left: 50%;
+    }
+    
+    .timeline-content {
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+    
+    .timeline-year {
+        font-weight: bold;
+        color: #e53935;
+        margin-bottom: 10px;
+    }
+    
+    /* Team Section */
+    .team-section {
+        padding: 80px 0;
+        background: #f8f9fa;
+    }
+    
+    .team-member {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .team-photo {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        overflow: hidden;
+        border: 5px solid white;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .team-photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    /* CTA Section */
+    .cta-about {
+        background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+    }
+    
+    @media (max-width: 768px) {
+        .about-hero h1 {
+            font-size: 36px;
+        }
+        
+        .about-hero p {
+            font-size: 18px;
+        }
+        
+        .timeline::after {
+            left: 31px;
+        }
+        
+        .timeline-item {
+            width: 100%;
+            padding-left: 70px;
+            padding-right: 25px;
+        }
+        
+        .timeline-item:nth-child(even) {
+            left: 0;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="about-hero" style="background-image: url('{% static 'img/about-3.jpg' %}');">
+    <div class="container">
+        <h1>About Nile Logistics</h1>
+        <p>Connecting businesses worldwide with reliable, efficient, and innovative logistics solutions since 2010.</p>
+    </div>
+</div>
+
+<!-- Stats Section -->
+<div class="stats-section">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-item">
+                    <div class="stat-number">14+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Countries Served</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-item">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Shipments Monthly</div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-item">
+                    <div class="stat-number">99.7%</div>
+                    <div class="stat-label">On-Time Delivery</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Our Story -->
+<div class="mission-vision">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-12 text-center mb-5">
+                <h2 class="mb-3">Our Story</h2>
+                <p class="lead" style="max-width: 800px; margin: 0 auto;">
+                    Founded in 2010, Nile Logistics began as a small freight forwarding company with a vision to simplify global trade. Today, we've grown into a comprehensive logistics provider serving businesses across continents with innovative supply chain solutions.
+                </p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-6 mb-4">
+                <div class="mission-box">
+                    <h3><i class="fa fa-bullseye"></i> Our Mission</h3>
+                    <p>To deliver exceptional logistics solutions that empower businesses to grow globally. We combine cutting-edge technology with personalized service to ensure seamless supply chain management for our clients.</p>
+                    <ul class="mt-3" style="padding-left: 20px;">
+                        <li>Simplify global trade for businesses of all sizes</li>
+                        <li>Provide transparent, real-time tracking</li>
+                        <li>Offer competitive pricing without compromising quality</li>
+                        <li>Ensure sustainable and ethical logistics practices</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 mb-4">
+                <div class="vision-box">
+                    <h3><i class="fa fa-eye"></i> Our Vision</h3>
+                    <p>To become the most trusted global logistics partner, recognized for innovation, reliability, and customer-centric solutions that transform how goods move across borders.</p>
+                    <ul class="mt-3" style="padding-left: 20px;">
+                        <li>Expand to 100+ countries by 2025</li>
+                        <li>Implement AI-powered logistics optimization</li>
+                        <li>Achieve carbon-neutral operations by 2030</li>
+                        <li>Develop industry-leading tracking technology</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Our Values -->
+<div class="values-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-12 text-center">
+                <h2 class="mb-3">Our Core Values</h2>
+                <p class="lead">The principles that guide everything we do</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fa fa-shield"></i>
+                    </div>
+                    <h4>Reliability</h4>
+                    <p>Consistent, dependable service you can count on for critical shipments and tight deadlines.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fa fa-bolt"></i>
+                    </div>
+                    <h4>Innovation</h4>
+                    <p>Leveraging technology to provide smarter, faster, and more efficient logistics solutions.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fa fa-users"></i>
+                    </div>
+                    <h4>Partnership</h4>
+                    <p>Working collaboratively with clients to understand and solve their unique logistics challenges.</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fa fa-leaf"></i>
+                    </div>
+                    <h4>Sustainability</h4>
+                    <p>Committed to environmentally responsible practices throughout our supply chain.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Timeline -->
+<div class="timeline-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-12 text-center">
+                <h2 class="mb-3">Our Journey</h2>
+                <p class="lead">Milestones in our growth and development</p>
+            </div>
+        </div>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2010</div>
+                    <h4>Company Founded</h4>
+                    <p>Nile Logistics established with focus on African-European trade routes.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2013</div>
+                    <h4>US Expansion</h4>
+                    <p>Opened first US office and established partnerships with major American carriers.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2016</div>
+                    <h4>Technology Platform Launch</h4>
+                    <p>Introduced real-time tracking system and customer portal for online management.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2019</div>
+                    <h4>Asian Market Entry</h4>
+                    <p>Expanded operations to China, Japan, and Southeast Asia with local offices.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2022</div>
+                    <h4>Sustainability Initiative</h4>
+                    <p>Launched green logistics program and committed to carbon-neutral shipping options.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <div class="timeline-year">2024</div>
+                    <h4>AI Integration</h4>
+                    <p>Implemented artificial intelligence for route optimization and predictive analytics.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Team Section -->
+<div class="team-section">
+    <div class="container">
+        <div class="row mb-5">
+            <div class="col-lg-12 text-center">
+                <h2 class="mb-3">Leadership Team</h2>
+                <p class="lead">The experts behind our success</p>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-lg-3 col-md-6">
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="{% static 'img/team-7.jpg' %}" alt="CEO">
+                    </div>
+                    <h4>Michael Chen</h4>
+                    <p class="text-muted">CEO & Founder</p>
+                    <p>20+ years in logistics and supply chain management</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="{% static 'img/team-8.jpg' %}" alt="COO">
+                    </div>
+                    <h4>Sarah Johnson</h4>
+                    <p class="text-muted">Chief Operations Officer</p>
+                    <p>Operations excellence and process optimization specialist</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="{% static 'img/team-4.jpg' %}" alt="CTO">
+                    </div>
+                    <h4>David Kim</h4>
+                    <p class="text-muted">Chief Technology Officer</p>
+                    <p>Logistics technology and digital transformation expert</p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="team-member">
+                    <div class="team-photo">
+                        <img src="{% static 'img/team-5.jpg' %}" alt="CFO">
+                    </div>
+                    <h4>Maria Rodriguez</h4>
+                    <p class="text-muted">Chief Financial Officer</p>
+                    <p>Financial strategy and international trade finance</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CTA Section -->
+<div class="cta-about">
+    <div class="container">
+        <h2 class="mb-4">Ready to Simplify Your Shipping?</h2>
+        <p class="mb-4" style="max-width: 700px; margin: 0 auto; opacity: 0.9;">
+            Join thousands of businesses that trust Nile Logistics for their global shipping needs. 
+            Get a free consultation and discover how we can optimize your supply chain.
+        </p>
+        <div class="mt-4">
+            <a href="{% url 'home' %}#track" class="btn btn-light btn-lg" style="padding: 15px 40px; border-radius: 30px;">
+                <i class="fa fa-phone"></i> Contact Us Today
+            </a>
+            <a href="{% url 'track_shipment' %}" class="btn btn-outline-light btn-lg ml-3" style="padding: 15px 40px; border-radius: 30px;">
+                <i class="fa fa-search"></i> Track Shipment
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

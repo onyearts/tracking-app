@@ -1,0 +1,739 @@
+<!-- templates/blog.html -->
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Logistics Blog - Shipping Insights & Industry News{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Hero Section */
+    .blog-hero {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7));
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 250px 0 190px;     
+        text-align: center;
+    }
+    
+    .blog-hero h1 {
+        font-size: 48px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+    }
+    
+    .blog-hero p {
+        font-size: 20px;
+        max-width: 700px;
+        margin: 0 auto;
+        opacity: 0.9;
+    }
+    
+    /* Categories */
+    .categories-section {
+        padding: 40px 0;
+        background: #f8f9fa;
+    }
+    
+    .category-filter {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+    }
+    
+    .category-btn {
+        padding: 10px 25px;
+        background: white;
+        border: 2px solid #ddd;
+        border-radius: 30px;
+        color: #666;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .category-btn:hover, .category-btn.active {
+        background: #e53935;
+        border-color: #e53935;
+        color: white;
+    }
+    
+    /* Blog Grid */
+    .blog-grid {
+        padding: 80px 0;
+        background: white;
+    }
+    
+    .blog-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        margin-bottom: 30px;
+        transition: transform 0.3s ease;
+        height: 100%;
+    }
+    
+    .blog-card:hover {
+        transform: translateY(-10px);
+    }
+    
+    .blog-image {
+        height: 250px;
+        overflow: hidden;
+    }
+    
+    .blog-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.5s ease;
+    }
+    
+    .blog-card:hover .blog-image img {
+        transform: scale(1.1);
+    }
+    
+    .blog-content {
+        padding: 25px;
+    }
+    
+    .blog-meta {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+        color: #666;
+        font-size: 14px;
+    }
+    
+    .blog-category {
+        background: #e53935;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        margin-right: 15px;
+    }
+    
+    .blog-date {
+        display: flex;
+        align-items: center;
+    }
+    
+    .blog-date i {
+        margin-right: 5px;
+    }
+    
+    .blog-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        line-height: 1.4;
+    }
+    
+    .blog-title a {
+        color: #333;
+        text-decoration: none;
+    }
+    
+    .blog-title a:hover {
+        color: #e53935;
+    }
+    
+    .blog-excerpt {
+        color: #666;
+        margin-bottom: 20px;
+        line-height: 1.6;
+    }
+    
+    .blog-author {
+        display: flex;
+        align-items: center;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 1px solid #eee;
+    }
+    
+    .author-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin-right: 15px;
+    }
+    
+    .author-avatar img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .author-info h5 {
+        margin: 0;
+        font-size: 14px;
+        font-weight: 600;
+    }
+    
+    .author-info p {
+        margin: 0;
+        font-size: 12px;
+        color: #666;
+    }
+    
+    /* Featured Post */
+    .featured-post {
+        margin-bottom: 50px;
+    }
+    
+    .featured-card {
+        background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('{% static "img/featured-post.jpg" %}');
+        background-size: cover;
+        background-position: center;
+        border-radius: 15px;
+        padding: 60px;
+        color: white;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .featured-badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #e53935;
+        color: white;
+        padding: 8px 20px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+    }
+    
+    /* Newsletter */
+    .newsletter-section {
+        padding: 80px 0;
+        background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+        color: white;
+        text-align: center;
+    }
+    
+    .newsletter-box {
+        background: rgba(255,255,255,0.1);
+        padding: 50px;
+        border-radius: 15px;
+        backdrop-filter: blur(10px);
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    /* Pagination */
+    .pagination {
+        justify-content: center;
+        margin-top: 50px;
+    }
+    
+    .page-link {
+        padding: 10px 20px;
+        margin: 0 5px;
+        border: 2px solid #ddd;
+        color: #666;
+        font-weight: 600;
+        border-radius: 5px;
+    }
+    
+    .page-link:hover, .page-item.active .page-link {
+        background: #e53935;
+        border-color: #e53935;
+        color: white;
+    }
+    
+    /* Sidebar */
+    .sidebar-widget {
+        background: #f8f9fa;
+        padding: 30px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+    
+    .widget-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin-bottom: 25px;
+        padding-bottom: 15px;
+        border-bottom: 3px solid #e53935;
+    }
+    
+    .recent-post {
+        display: flex;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .recent-post:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+    
+    .recent-post-img {
+        width: 80px;
+        height: 80px;
+        border-radius: 5px;
+        overflow: hidden;
+        margin-right: 15px;
+        flex-shrink: 0;
+    }
+    
+    .recent-post-img img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+    
+    .recent-post-content h5 {
+        font-size: 14px;
+        margin-bottom: 5px;
+        line-height: 1.4;
+    }
+    
+    .recent-post-content h5 a {
+        color: #333;
+        text-decoration: none;
+    }
+    
+    .recent-post-content h5 a:hover {
+        color: #e53935;
+    }
+    
+    .recent-post-date {
+        font-size: 12px;
+        color: #666;
+    }
+    
+    .tag-cloud {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .tag {
+        padding: 8px 15px;
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 20px;
+        font-size: 12px;
+        color: #666;
+        text-decoration: none;
+        transition: all 0.3s ease;
+    }
+    
+    .tag:hover {
+        background: #e53935;
+        border-color: #e53935;
+        color: white;
+    }
+    
+    @media (max-width: 768px) {
+        .blog-hero h1 {
+            font-size: 36px;
+        }
+        
+        .blog-hero p {
+            font-size: 18px;
+        }
+        
+        .featured-card {
+            padding: 30px;
+        }
+        
+        .newsletter-box {
+            padding: 30px 20px;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="blog-hero" style="background-image: url('{% static 'img/blog-1.jpg' %}');">
+    <div class="container">
+        <h1>Logistics Insights & News</h1>
+        <p>Stay updated with the latest trends, technologies, and best practices in global shipping and supply chain management.</p>
+    </div>
+</div>
+
+<!-- Categories -->
+<div class="categories-section">
+    <div class="container">
+        <div class="category-filter">
+            <button class="category-btn active" data-filter="all">All Articles</button>
+            <button class="category-btn" data-filter="shipping">Shipping & Freight</button>
+            <button class="category-btn" data-filter="technology">Logistics Tech</button>
+            <button class="category-btn" data-filter="sustainability">Sustainability</button>
+            <button class="category-btn" data-filter="customs">Customs & Compliance</button>
+            <button class="category-btn" data-filter="industry">Industry News</button>
+        </div>
+    </div>
+</div>
+
+<!-- Blog Content -->
+<div class="blog-grid">
+    <div class="container">
+        <!-- Featured Post -->
+        <div class="featured-post">
+            <div class="featured-card">
+                <div class="featured-badge">FEATURED</div>
+                <div class="row align-items-center">
+                    <div class="col-lg-8">
+                        <div class="blog-meta">
+                            <span class="blog-category">INDUSTRY NEWS</span>
+                            <span class="blog-date"><i class="fa fa-calendar"></i> April 15, 2024</span>
+                        </div>
+                        <h2 style="color: white; font-size: 36px; margin-bottom: 20px;">The Future of AI in Logistics: 2024 Trends</h2>
+                        <p style="color: rgba(255,255,255,0.9); margin-bottom: 30px; font-size: 18px;">
+                            Discover how artificial intelligence is revolutionizing supply chain management, from predictive analytics to autonomous delivery systems.
+                        </p>
+                        <a href="#" class="btn btn-light" style="padding: 12px 30px; border-radius: 30px; font-weight: 600;">
+                            Read Full Article <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blog Grid -->
+        <div class="row">
+            <!-- Main Content -->
+            <div class="col-lg-8">
+                <div class="row" id="blog-container">
+                    <!-- Article 1 -->
+                    <div class="col-lg-6 mb-4" data-category="technology">
+                        <div class="blog-card">
+                            <div class="blog-image">
+                                <img src="{% static 'img/blog/blockchain-logistics.jpg' %}" alt="Blockchain in Logistics">
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-category">LOGISTICS TECH</span>
+                                    <span class="blog-date"><i class="fa fa-calendar"></i> April 10, 2024</span>
+                                </div>
+                                <h3 class="blog-title"><a href="#">Blockchain Technology: Transforming Supply Chain Transparency</a></h3>
+                                <p class="blog-excerpt">How distributed ledger technology is creating immutable records for shipment tracking, customs documentation, and payment processing.</p>
+                                <div class="blog-author">
+                                    <div class="author-avatar">
+                                        <img src="{% static 'img/authors/author1.jpg' %}" alt="Author">
+                                    </div>
+                                    <div class="author-info">
+                                        <h5>Dr. Sarah Chen</h5>
+                                        <p>Supply Chain Technology Expert</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article 2 -->
+                    <div class="col-lg-6 mb-4" data-category="sustainability">
+                        <div class="blog-card">
+                            <div class="blog-image">
+                                <img src="{% static 'img/blog/green-logistics.jpg' %}" alt="Green Logistics">
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-category">SUSTAINABILITY</span>
+                                    <span class="blog-date"><i class="fa fa-calendar"></i> April 5, 2024</span>
+                                </div>
+                                <h3 class="blog-title"><a href="#">Green Logistics: Achieving Carbon Neutral Shipping</a></h3>
+                                <p class="blog-excerpt">Practical strategies for reducing carbon footprint in freight transportation, including alternative fuels and route optimization.</p>
+                                <div class="blog-author">
+                                    <div class="author-avatar">
+                                        <img src="{% static 'img/authors/author2.jpg' %}" alt="Author">
+                                    </div>
+                                    <div class="author-info">
+                                        <h5>Michael Roberts</h5>
+                                        <p>Sustainability Director</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article 3 -->
+                    <div class="col-lg-6 mb-4" data-category="customs">
+                        <div class="blog-card">
+                            <div class="blog-image">
+                                <img src="{% static 'img/blog/customs-clearance.jpg' %}" alt="Customs Clearance">
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-category">CUSTOMS & COMPLIANCE</span>
+                                    <span class="blog-date"><i class="fa fa-calendar"></i> March 28, 2024</span>
+                                </div>
+                                <h3 class="blog-title"><a href="#">Navigating International Customs: 2024 Regulation Updates</a></h3>
+                                <p class="blog-excerpt">Essential guide to recent changes in customs regulations across major trading regions and how to ensure compliance.</p>
+                                <div class="blog-author">
+                                    <div class="author-avatar">
+                                        <img src="{% static 'img/authors/author3.jpg' %}" alt="Author">
+                                    </div>
+                                    <div class="author-info">
+                                        <h5>James Wilson</h5>
+                                        <p>Customs Compliance Specialist</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article 4 -->
+                    <div class="col-lg-6 mb-4" data-category="shipping">
+                        <div class="blog-card">
+                            <div class="blog-image">
+                                <img src="{% static 'img/blog/last-mile.jpg' %}" alt="Last Mile Delivery">
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-category">SHIPPING & FREIGHT</span>
+                                    <span class="blog-date"><i class="fa fa-calendar"></i> March 22, 2024</span>
+                                </div>
+                                <h3 class="blog-title"><a href="#">Last-Mile Delivery Innovations: From Drones to Lockers</a></h3>
+                                <p class="blog-excerpt">Exploring emerging technologies and strategies for optimizing the final leg of delivery to improve customer satisfaction.</p>
+                                <div class="blog-author">
+                                    <div class="author-avatar">
+                                        <img src="{% static 'img/authors/author4.jpg' %}" alt="Author">
+                                    </div>
+                                    <div class="author-info">
+                                        <h5>Lisa Martinez</h5>
+                                        <p>Logistics Operations Manager</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article 5 -->
+                    <div class="col-lg-6 mb-4" data-category="industry">
+                        <div class="blog-card">
+                            <div class="blog-image">
+                                <img src="{% static 'img/blog/global-trade.jpg' %}" alt="Global Trade">
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-category">INDUSTRY NEWS</span>
+                                    <span class="blog-date"><i class="fa fa-calendar"></i> March 15, 2024</span>
+                                </div>
+                                <h3 class="blog-title"><a href="#">Global Trade Outlook 2024: Opportunities and Challenges</a></h3>
+                                <p class="blog-excerpt">Analysis of emerging markets, trade agreements, and geopolitical factors affecting international shipping this year.</p>
+                                <div class="blog-author">
+                                    <div class="author-avatar">
+                                        <img src="{% static 'img/authors/author5.jpg' %}" alt="Author">
+                                    </div>
+                                    <div class="author-info">
+                                        <h5>David Kim</h5>
+                                        <p>International Trade Analyst</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article 6 -->
+                    <div class="col-lg-6 mb-4" data-category="technology">
+                        <div class="blog-card">
+                            <div class="blog-image">
+                                <img src="{% static 'img/blog/iot-logistics.jpg' %}" alt="IoT Logistics">
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-category">LOGISTICS TECH</span>
+                                    <span class="blog-date"><i class="fa fa-calendar"></i> March 10, 2024</span>
+                                </div>
+                                <h3 class="blog-title"><a href="#">IoT in Logistics: Real-Time Monitoring and Predictive Maintenance</a></h3>
+                                <p class="blog-excerpt">How Internet of Things devices are enabling real-time cargo monitoring, temperature control, and equipment maintenance.</p>
+                                <div class="blog-author">
+                                    <div class="author-avatar">
+                                        <img src="{% static 'img/authors/author6.jpg' %}" alt="Author">
+                                    </div>
+                                    <div class="author-info">
+                                        <h5>Rachel Green</h5>
+                                        <p>IoT Solutions Architect</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pagination -->
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Search Widget -->
+                <div class="sidebar-widget">
+                    <h4 class="widget-title">Search Articles</h4>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search topics...">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categories Widget -->
+                <div class="sidebar-widget">
+                    <h4 class="widget-title">Categories</h4>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="d-flex justify-content-between py-2"><span>Shipping & Freight</span> <span class="badge badge-primary">12</span></a></li>
+                        <li><a href="#" class="d-flex justify-content-between py-2"><span>Logistics Technology</span> <span class="badge badge-primary">8</span></a></li>
+                        <li><a href="#" class="d-flex justify-content-between py-2"><span>Sustainability</span> <span class="badge badge-primary">6</span></a></li>
+                        <li><a href="#" class="d-flex justify-content-between py-2"><span>Customs & Compliance</span> <span class="badge badge-primary">9</span></a></li>
+                        <li><a href="#" class="d-flex justify-content-between py-2"><span>Industry News</span> <span class="badge badge-primary">15</span></a></li>
+                        <li><a href="#" class="d-flex justify-content-between py-2"><span>Warehousing</span> <span class="badge badge-primary">5</span></a></li>
+                    </ul>
+                </div>
+
+                <!-- Recent Posts Widget -->
+                <div class="sidebar-widget">
+                    <h4 class="widget-title">Recent Posts</h4>
+                    <div class="recent-post">
+                        <div class="recent-post-img">
+                            <img src="{% static 'img/blog/blockchain-logistics.jpg' %}" alt="Post">
+                        </div>
+                        <div class="recent-post-content">
+                            <h5><a href="#">Blockchain in Supply Chain Management</a></h5>
+                            <div class="recent-post-date">April 10, 2024</div>
+                        </div>
+                    </div>
+                    <div class="recent-post">
+                        <div class="recent-post-img">
+                            <img src="{% static 'img/blog/green-logistics.jpg' %}" alt="Post">
+                        </div>
+                        <div class="recent-post-content">
+                            <h5><a href="#">Sustainable Shipping Practices</a></h5>
+                            <div class="recent-post-date">April 5, 2024</div>
+                        </div>
+                    </div>
+                    <div class="recent-post">
+                        <div class="recent-post-img">
+                            <img src="{% static 'img/blog/customs-clearance.jpg' %}" alt="Post">
+                        </div>
+                        <div class="recent-post-content">
+                            <h5><a href="#">Customs Regulation Updates</a></h5>
+                            <div class="recent-post-date">March 28, 2024</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tags Widget -->
+                <div class="sidebar-widget">
+                    <h4 class="widget-title">Popular Tags</h4>
+                    <div class="tag-cloud">
+                        <a href="#" class="tag">#Shipping</a>
+                        <a href="#" class="tag">#Logistics</a>
+                        <a href="#" class="tag">#SupplyChain</a>
+                        <a href="#" class="tag">#Freight</a>
+                        <a href="#" class="tag">#Customs</a>
+                        <a href="#" class="tag">#Technology</a>
+                        <a href="#" class="tag">#Sustainability</a>
+                        <a href="#" class="tag">#GlobalTrade</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Newsletter -->
+<div class="newsletter-section">
+    <div class="container">
+        <div class="newsletter-box">
+            <h2 class="mb-3">Stay Updated</h2>
+            <p class="mb-4" style="opacity: 0.9;">
+                Subscribe to our newsletter for the latest logistics insights, industry updates, and shipping tips delivered to your inbox.
+            </p>
+            <form class="form-inline justify-content-center">
+                <div class="form-group mr-2 mb-2">
+                    <input type="email" class="form-control" placeholder="Enter your email" style="min-width: 300px; padding: 15px; border-radius: 30px 0 0 30px;">
+                </div>
+                <button type="submit" class="btn btn-primary mb-2" style="padding: 15px 30px; border-radius: 0 30px 30px 0; background: #e53935; border-color: #e53935;">
+                    Subscribe
+                </button>
+            </form>
+            <p class="mt-3" style="font-size: 14px; opacity: 0.7;">
+                We respect your privacy. Unsubscribe at any time.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Category filtering
+    document.addEventListener('DOMContentLoaded', function() {
+        const filterButtons = document.querySelectorAll('.category-btn');
+        const blogCards = document.querySelectorAll('[data-category]');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filterValue = this.getAttribute('data-filter');
+                
+                // Show/hide blog cards based on filter
+                blogCards.forEach(card => {
+                    if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+        
+        // Search functionality
+        const searchInput = document.querySelector('input[placeholder="Search topics..."]');
+        const searchButton = document.querySelector('.sidebar-widget .btn-primary');
+        
+        searchButton.addEventListener('click', function() {
+            const searchTerm = searchInput.value.toLowerCase();
+            if (searchTerm.trim() === '') return;
+            
+            blogCards.forEach(card => {
+                const title = card.querySelector('.blog-title').textContent.toLowerCase();
+                const excerpt = card.querySelector('.blog-excerpt').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || excerpt.includes(searchTerm)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Reset category buttons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            document.querySelector('[data-filter="all"]').classList.add('active');
+        });
+        
+        // Enter key for search
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchButton.click();
+            }
+        });
+    });
+</script>
+{% endblock %}

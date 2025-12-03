@@ -26,7 +26,13 @@ SECRET_KEY = 'VjM6Zw3mUCfpIcgVdOcq7zwYLo1g7X_chWYcKzUAXzJ03DLsvVOkJ9lYPlzWIKftJ7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.pythonanywhere.com', 'tracking.pythonanywhere.com']
+# Update with your PythonAnywhere domain
+ALLOWED_HOSTS = [
+    'tracking.pythonanywhere.com',  # Replace with your actual username
+    'www.yourusername.pythonanywhere.com',
+    'localhost',  # Keep for local testing if needed
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -114,7 +120,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/

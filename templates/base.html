@@ -60,8 +60,8 @@
                                 <div class="col-lg-7 col-md-12 position-inherit">
                                     <ul id="menu-main" class="nav-menu float-xl-left text-lg-center link-padding-tb-25px dropdown-dark">
                                         <li><a href="{% url 'home' %}">Home</a></li>
-                                        <li><a href="#">About</a></li>
-                                        <li><a href="#">Blog</a></li>
+                                        <li><a href="{% url 'about' %}">About</a></li>
+                                        <li><a href="{% url 'blog' %}">Blog</a></li>
                                         <li><a href="{% url 'track_shipment' %}">Track</a></li>
                                     </ul>
 
@@ -150,7 +150,7 @@
                             <a href="#"><img src="{% static 'img/logo-1.png' %}" alt=""></a>
                         </div>
                         <div class="text margin-bottom-35px">
-                            Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                            Nile Logistics provides end-to-end global shipping solutions with real-time tracking, customs clearance, and dedicated support. We connect businesses worldwide through our extensive carrier network and advanced logistics technology.
                         </div>
                         <a href="#" class="nile-bottom sm">Read More</a>
                     </div>
@@ -174,11 +174,11 @@
                     <div class="nile-widget widget_nav_menu sm-mb-45px">
                         <h2 class="title">Site Pages</h2>
                         <ul class="footer-menu">
-                            <li><a href="#">Cargo Transportation </a></li>
-                            <li><a href="#">Air Freight </a></li>
-                            <li><a href="#">Ocean Freight </a></li>
-                            <li><a href="#">Packaging & Storage </a></li>
-                            <li><a href="#">Air Freight </a></li>
+                            <li><a href="{% url 'home' %}">Home </a></li>
+                            <li><a href="{% url 'about' %}">About</a></li>
+                            <li><a href="{% url 'blog' %}">Blog</a></li>
+                            <li><a href="{% url 'track_shipment' %}">Track</a></li>
+                            <li><a href="/admin/" target="_blank">Admin</a></li>
                         </ul>
                     </div>
                 </div>
@@ -212,22 +212,12 @@
             </div>
         </div>
         <div class="copy-right">
-            <div class="container padding-tb-50px">
+            <div class="container padding-tb-30px">
                 <div class="row">
-                    <div class="col-lg-6">
-                        <div class="copy-right-text text-lg-left text-center sm-mb-15px"><a target="_blank" href="https://www.templateshub.net">Templates Hub</a> </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <!--  Social -->
-                        <ul class="social-media list-inline text-lg-right text-center margin-0px text-white">
-                            <li class="list-inline-item"><a class="facebook" href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-                            <li class="list-inline-item"><a class="youtube" href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i></a></li>
-                            <li class="list-inline-item"><a class="linkedin" href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a></li>
-                            <li class="list-inline-item"><a class="google" href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                            <li class="list-inline-item"><a class="twitter" href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-                            <li class="list-inline-item"><a class="rss" href="#"><i class="fa fa-rss" aria-hidden="true"></i></a></li>
-                        </ul>
-                        <!-- // Social -->
+                    <div class="col-lg-12 text-center">
+                        <div class="copy-right-text opacity-9">
+                            Copyright © 2025 Nile Logistics. All rights reserved worldwide.
+                        </div>
                     </div>
                 </div>
             </div>

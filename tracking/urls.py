@@ -18,6 +18,13 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from django.utils.translation import gettext_lazy as _
+
+# Customize admin site
+admin.site.site_header = "Nile Logistics Administration"
+admin.site.site_title = "Nile Logistics Admin Portal"
+admin.site.index_title = "Welcome to Nile Logistics Administration"
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
